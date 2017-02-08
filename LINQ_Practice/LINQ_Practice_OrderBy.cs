@@ -33,14 +33,14 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsByName()
         {
-            var expected = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            var expected = PracticeData.OrderBy(c => c.Name).ToList();
             CollectionAssert.AreEqual(expected, new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort4, CohortBuilder.Cohort1, CohortBuilder.Cohort3 });
         }
         
         [TestMethod]
         public void GetAllStudentsInCohort1ByBirthday()
         {
-            var expected = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList(); //HINT: Cohort1 is PracticeData[0]
+            var expected = PracticeData.Single(c => c.Name == "Cohort1").ToList(); //HINT: Cohort1 is PracticeData[0]
             CollectionAssert.AreEqual(expected, new List<Student> { CohortBuilder.Student5, CohortBuilder.Student1, CohortBuilder.Student4, CohortBuilder.Student2, CohortBuilder.Student3 });
         }
 
