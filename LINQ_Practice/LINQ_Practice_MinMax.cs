@@ -36,7 +36,7 @@ namespace LINQ_Practice
         [TestMethod]
         public void WhatIsTheBirthdayOfTheOldestStudentInCohort3()
         {
-            var minValue = PracticeData[2].Students.Min(s => s.Birthday); //HINT: Cohort3 is PracticeData[2]
+            var minValue = PracticeData[2].Students.Min((s)=> s.Birthday); //HINT: Cohort3 is PracticeData[2]
             Assert.AreEqual(minValue, new DateTime(1972, 11, 14));
         }
 
