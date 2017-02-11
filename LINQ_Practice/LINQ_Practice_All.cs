@@ -58,8 +58,8 @@ namespace LINQ_Practice
         [TestMethod]
         public void DoAllStudentsInCohort1HaveFirstNamesThatContainTheLetterE()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/; //Hint: Cohort1 would be PracticeData[0]
-            Assert.IsTrue(false); //<-- change false to doAll
+            var doAll = PracticeData.All(students => students.Students[0].FirstName.Contains("E"));
+            Assert.IsTrue(doAll); //<-- change false to doAll
         }
 
         [TestMethod]

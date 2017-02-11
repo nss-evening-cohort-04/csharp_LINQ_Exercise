@@ -65,8 +65,8 @@ namespace LINQ_Practice
         [TestMethod]
         public void AreAnyJuniorInstructorsInCohort4NotActive()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;  //HINT: Cohort4 is PracticeData[3]
-            Assert.IsFalse(true); //<-- change true to doAny
+            var doAny = PracticeData.Any(instructors => instructors.JuniorInstructors[3].Active == false);
+            Assert.IsFalse(doAny); //<-- change true to doAny
         }
     }
 }

@@ -43,7 +43,7 @@ namespace LINQ_Practice
         [TestMethod]
         public void HowManyJuniorInstructorsAreThereInTheCohortWithTheMostJuniorInstructors()
         {
-            var maxValue = PracticeData/*FILL IN LINQ EXPRESSION*/; 
+            var maxValue = PracticeData.Max(instructors => instructors.JuniorInstructors.Count); 
             Assert.AreEqual(maxValue, 3);
         }
     }
