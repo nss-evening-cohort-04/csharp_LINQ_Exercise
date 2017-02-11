@@ -38,12 +38,12 @@ namespace LINQ_Practice
             PracticeData = null;
         }
 
-        [TestMethod]
-        public void GetAllPrimaryInstructorsInAllCohorts()
-        {
-            var expected = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
-            CollectionAssert.AreEqual(expected, new List<Instructor> { CohortBuilder.Instructor2, CohortBuilder.Instructor6, CohortBuilder.Instructor3, CohortBuilder.Instructor1});
-        }
+        //[TestMethod]
+        //public void GetAllPrimaryInstructorsInAllCohorts()
+        //{
+        //    var expected = PracticeData.SelectMany(cohort => cohort.PrimaryInstructor.ToList(Instructor);
+        //    CollectionAssert.AreEqual(expected, new List<Instructor> { CohortBuilder.Instructor2, CohortBuilder.Instructor6, CohortBuilder.Instructor3, CohortBuilder.Instructor1});
+        //}
         
         [TestMethod]
         public void GetAllStudents()
