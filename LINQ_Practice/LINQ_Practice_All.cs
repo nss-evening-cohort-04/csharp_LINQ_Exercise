@@ -30,8 +30,8 @@ namespace LINQ_Practice
         [TestMethod]
         public void DoAllCohortsHaveTwoOrMoreJuniorInstructors()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAll
+            var doAll = PracticeData.All(Cohort => Cohort.JuniorInstructors.Count >= 2);
+            Assert.IsTrue(doAll); //<-- change false to doAll
         }
 
         [TestMethod]
@@ -44,15 +44,15 @@ namespace LINQ_Practice
         [TestMethod]
         public void DoAllCohortsHavePrimaryInstructorsBornIn1980s()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsFalse(true); //<-- change true to doAll
+            var doAll = PracticeData.All(instructors => instructors.PrimaryInstructor.Birthday.Year >= 1980 && instructors.PrimaryInstructor.Birthday.Year <= 1989);
+            Assert.IsFalse(doAll); //<-- change true to doAll
         }
 
         [TestMethod]
         public void DoAllCohortsHaveActivePrimaryInstructors()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(true); //<-- change true to doAll
+            var doAll = PracticeData.All(cohorts => cohorts.PrimaryInstructor.Active);
+            Assert.IsTrue(doAll); //<-- change true to doAll
         }
 
         [TestMethod]
@@ -65,8 +65,8 @@ namespace LINQ_Practice
         [TestMethod]
         public void DoAllActiveCohortsHavePrimaryInstructorsWithFirstNamesThatContainTheLetterA()
         {
-            var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsFalse(false); //<-- change false to doAll
+            var doAll = PracticeData.All(instructors => instructors.PrimaryInstructor.FirstName.Contains("A"));
+            Assert.IsFalse(doAll); //<-- change false to doAll
         }
     }
 }
