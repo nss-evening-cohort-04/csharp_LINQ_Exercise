@@ -80,5 +80,12 @@ namespace LINQ_Practice
             CollectionAssert.AreEqual(expected, new List<string> { "Evening Five", "Cohort of the Future", "Evening Ninja Warriors", "Day Backgammon Geeks" });
         }
 
+        [TestMethod]
+        public void GetEveFiveCohortName()
+        {
+            var expected = (from p in PracticeData where p.Name == "Evening Five" select p.Name).ToList();
+            CollectionAssert.AreEqual(expected, new List<string> { "Evening Five" });
+        }
+
     }
 }
