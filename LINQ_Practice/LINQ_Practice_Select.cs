@@ -80,6 +80,7 @@ namespace LINQ_Practice
             CollectionAssert.AreEqual(expected, new List<string> { "Evening Five", "Cohort of the Future", "Evening Ninja Warriors", "Day Backgammon Geeks" });
         }
 
+        //practice with query syntax
         [TestMethod]
         public void GetEveFiveCohortName()
         {
