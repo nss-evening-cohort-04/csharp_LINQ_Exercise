@@ -43,28 +43,28 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsWhereAStudentOrInstructorFirstNameIsKate()
         {
-            var ActualCohorts = PracticeData.Where(studOrIn => studOrIn.JuniorInstructors.Any(itemName => itemName.FirstName == "Kate") || studOrIn.Students.All(newItemName => newItemName.FirstName == "Kate")).ToList();
+            var ActualCohorts = PracticeData.Where(studOrIn => studOrIn.PrimaryInstructor.FirstName == "Kate" || studOrIn.JuniorInstructors.Any(newJunInstruc => newJunInstruc.FirstName == "Kate")||studOrIn.Students.Any(newItemName => newItemName.FirstName == "Kate")).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1, CohortBuilder.Cohort3, CohortBuilder.Cohort4 });
         }
 
         [TestMethod]
         public void GetOldestStudent()
         {
-            var student = PracticeData.Min(oldStudent => oldStudent.Students.Min(oldAge => oldAge.Birthday.Year));
+            var student = PracticeData.SelectMany(oldStudent => oldStudent.Students).OrderBy(oldAge => oldAge.Birthday).First();
             Assert.AreEqual(student, CohortBuilder.Student18);
         }
 
         [TestMethod]
         public void GetYoungestStudent()
         {
-            var student = PracticeData.Max(youngStud => youngStud.Students.Min(youngStud2 => youngStud2.Birthday.Year));
+            var student = PracticeData.SelectMany(youngStud => youngStud.Students).OrderBy(youngStud2 => youngStud2.Birthday.Year).Last();
             Assert.AreEqual(student, CohortBuilder.Student3);
         }
 
         [TestMethod]
         public void GetAllInactiveStudentsByLastName()
         {
-            var ActualStudents = PracticeData.OrderBy(studLastName => studLastName.Students.OrderBy(lastName => lastName.LastName)).ToList();
+            var ActualStudents = PracticeData.SelectMany(studLastName => studLastName.Students).Where(lastName => lastName.Active == false).ToList();
             CollectionAssert.AreEqual(ActualStudents, new List<Student> { CohortBuilder.Student2, CohortBuilder.Student11, CohortBuilder.Student12, CohortBuilder.Student17 });
         }
     }
