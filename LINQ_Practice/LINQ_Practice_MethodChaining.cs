@@ -36,8 +36,7 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsWhereFullTimeIsFalseAndAllInstructorsAreActive()
         {
-            var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
-            //var ActualCohorts = PracticeData.Where(cohort => cohort.FullTime == false && cohort.PrimaryInstructor.Active == true && cohort.JuniorInstructors.Any(junior => junior.Active == true)).ToList();
+            var ActualCohorts = PracticeData.Where(cohort => cohort.FullTime == false && cohort.PrimaryInstructor.Active == true && cohort.JuniorInstructors.All(junior => junior.Active == true)).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1 });
         }
 
@@ -65,7 +64,7 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllInactiveStudentsByLastName()
         {
-            var ActualStudents = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            var ActualStudents = PracticeData.SelectMany(cohort => cohort.Students.Where(student => student.Active == false)).OrderBy(student => student.LastName).ToList();
             CollectionAssert.AreEqual(ActualStudents, new List<Student> { CohortBuilder.Student2, CohortBuilder.Student11, CohortBuilder.Student12, CohortBuilder.Student17 });
         }
     }
