@@ -68,13 +68,13 @@ namespace LINQ_Practice
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetFirstCohortThatIsBothNotActiveAndNotFullTimeOrThrowException()
         {
-            var shouldThrowException = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var shouldThrowException = PracticeData.Single(cohort => cohort.Active == false && cohort.FullTime == false);
         }
 
         [TestMethod]
         public void GetFirstCohortWith2JuniorInstructors()
         {
-            var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var ActualCohort = PracticeData.First(cohort => cohort.JuniorInstructors.Count == 2);
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort1);
         }
 
