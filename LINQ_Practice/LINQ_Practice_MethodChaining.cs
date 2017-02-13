@@ -29,14 +29,18 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsWithZacharyZohanAsPrimaryOrJuniorInstructor()
         {
-            var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            //.Where returns data (pick out the cohorts with)
+            //.Any whether any elements of a sequence satisfies a condition (returns bool)
+            //.ToList adds to a list
+            var ActualCohorts = PracticeData.Where(p => p.PrimaryInstructor.FirstName == "Zachary"  || p.JuniorInstructors.Any(j => j.FirstName == "Zachary")).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort3 });
         }
 
         [TestMethod]
         public void GetAllCohortsWhereFullTimeIsFalseAndAllInstructorsAreActive()
         {
-            var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            //.All whether all elements of a sequence satisfy a condition (returns a bool)
+            var ActualCohorts = PracticeData.Where(p=> p.FullTime == false && p.PrimaryInstructor.Active == true && p.JuniorInstructors.All(j => j.Active == true)).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1 });
         }
 
