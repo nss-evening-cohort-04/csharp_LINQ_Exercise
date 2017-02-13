@@ -29,42 +29,42 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsWithZacharyZohanAsPrimaryOrJuniorInstructor()
         {
-            var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            var ActualCohorts = PracticeData.Where(zachPrim => zachPrim.PrimaryInstructor.FirstName == "Zachary" && zachPrim.PrimaryInstructor.LastName == "Zohan" || zachPrim.JuniorInstructors.Any(item => item.FirstName == "Zachary" && item.LastName == "Zohan")).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort3 });
         }
 
         [TestMethod]
         public void GetAllCohortsWhereFullTimeIsFalseAndAllInstructorsAreActive()
         {
-            var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            var ActualCohorts = PracticeData.Where(fullAndActive => fullAndActive.FullTime == false && fullAndActive.PrimaryInstructor.Active == true && fullAndActive.JuniorInstructors.All(junAct => junAct.Active == true)).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1 });
         }
 
         [TestMethod]
         public void GetAllCohortsWhereAStudentOrInstructorFirstNameIsKate()
         {
-            var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            var ActualCohorts = PracticeData.Where(studOrIn => studOrIn.PrimaryInstructor.FirstName == "Kate" || studOrIn.JuniorInstructors.Any(newJunInstruc => newJunInstruc.FirstName == "Kate")||studOrIn.Students.Any(newItemName => newItemName.FirstName == "Kate")).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1, CohortBuilder.Cohort3, CohortBuilder.Cohort4 });
         }
 
         [TestMethod]
         public void GetOldestStudent()
         {
-            var student = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var student = PracticeData.SelectMany(oldStudent => oldStudent.Students).OrderBy(oldAge => oldAge.Birthday).First();
             Assert.AreEqual(student, CohortBuilder.Student18);
         }
 
         [TestMethod]
         public void GetYoungestStudent()
         {
-            var student = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var student = PracticeData.SelectMany(youngStud => youngStud.Students).OrderBy(youngStud2 => youngStud2.Birthday.Year).Last();
             Assert.AreEqual(student, CohortBuilder.Student3);
         }
 
         [TestMethod]
         public void GetAllInactiveStudentsByLastName()
         {
-            var ActualStudents = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            var ActualStudents = PracticeData.SelectMany(studLastName => studLastName.Students).Where(lastName => lastName.Active == false).ToList();
             CollectionAssert.AreEqual(ActualStudents, new List<Student> { CohortBuilder.Student2, CohortBuilder.Student11, CohortBuilder.Student12, CohortBuilder.Student17 });
         }
     }
